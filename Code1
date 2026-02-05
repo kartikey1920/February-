@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fce4ec;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 { color: #d32f2f; font-size: 2.5rem; }
+
+        .container { position: relative; width: 100%; max-width: 600px; }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #yesBtn { background-color: #4caf50; color: white; z-index: 100; }
+
+        #noBtn { background-color: #f44336; color: white; }
+
+        .gif-container img { width: 250px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="gif-container" id="gifContainer">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueWp4N3p5M3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K6S6H6v8s8vS0/giphy.gif" alt="Cute Cat">
+    </div>
+
+    <h1 id="question">Will you be my Valentine?</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const gifContainer = document.getElementById('gifContainer');
+
+        let noCount = 0;
+        const phrases = [
+            "No", "Are you sure??", "Pookie please...", "Just think about it!", 
+            "If you say no, I will be really sad...", "I will be very sad...", 
+            "I will be very very very sad...", "Okay, I'm crying now... ;("
+        ];
+
+        noBtn.addEventListener('click', () => {
+            noCount++;
+            // Change the text of the No button
+            noBtn.innerText = phrases[Math.min(noCount, phrases.length - 1)];
+            
+            // Make the Yes button bigger
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize * 1.5) + 'px';
+            yesBtn.style.padding = (currentSize * 1) + 'px ' + (currentSize * 2) + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            question.innerText = "Knew you would say yes! ❤️";
+            // Replace with a "celebration" GIF
+            gifContainer.innerHTML = '<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueWp4N3p5M3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4Y3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOjy0QJD1S/giphy.gif">';
+            noBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
